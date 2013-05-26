@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include "Color.h"
+#include "Node.h"
+
 using namespace std;
 
 #include <GL/freeglut.h>

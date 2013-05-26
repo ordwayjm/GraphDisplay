@@ -1,5 +1,4 @@
-#include <cstdio>
-using namespace std;
+#pragma once
 
 struct Color {
 	public:
@@ -8,6 +7,13 @@ struct Color {
 			r = initR;
 			g = initG;
 			b = initB;
+		}
+
+		Color() 
+		{
+			r = 255;
+			g = 255;
+			b = 255;
 		}
 
 		int getR() const { return r; }
