@@ -14,10 +14,16 @@ struct Color {
 			r = g = b = 255;
 		}
 
-		int getR() const { return r; }
-		int getG() const { return g; }
-		int getB() const { return b; }
+		int getR() { return r; }
+		int getG() { return g; }
+		int getB() { return b; }
+
+		void setR(int newR) { r = newR; }
+		void setG(int newG) { g = newG; }
+		void setB(int newB) { b = newB; }
 
 	private:
-		int r, g, b;
+		int r;
+		int g;
+		int b;
 };
