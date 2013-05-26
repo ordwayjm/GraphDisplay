@@ -18,6 +18,7 @@ struct Color {
 		int getG() { return g; }
 		int getB() { return b; }
 
+		void setColor(int newR, int newG, int newB) { r = newR; g = newG; b = newB; }
 		void setR(int newR) { r = newR; }
 		void setG(int newG) { g = newG; }
 		void setB(int newB) { b = newB; }
