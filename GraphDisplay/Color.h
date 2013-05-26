@@ -11,9 +11,7 @@ struct Color {
 
 		Color() 
 		{
-			r = 255;
-			g = 255;
-			b = 255;
+			r = g = b = 255;
 		}
 
 		int getR() const { return r; }
