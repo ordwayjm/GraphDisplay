@@ -11,6 +11,9 @@ using namespace std;
 const int W = 800, H = 400;
 const int nodeWidth = 10;
 
+Node* nodes;
+int numNodes;
+int numEdges;
 
 void setClippingRectangle(double lx, double ly,
 						  double rx, double ry)
@@ -87,12 +90,23 @@ void triangle(int x, int y, Color color, bool filled)
 
 void display(void)
 {
-	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	Color color1(255, 0, 0);
-	square(100, 150, color1, true);
+	for(int i = 0; i < numNodes; i++)
+	{
+		switch(nodes[i].getType()) 
+		{
+			case 's': 
+					square(nodes[i].getX(), nodes[i].getY(), nodes[i].getColor(), nodes[i].isFilled());
+					break;
+			case 't': 
+					triangle(nodes[i].getX(), nodes[i].getY(), nodes[i].getColor(), nodes[i].isFilled());
+					break;
+		}
 
+	}
+	
 	glutSwapBuffers();
 	glFlush();
 }
@@ -113,21 +127,39 @@ bool readFile(string filename)
 	if(input.is_open())
 	{
 		input >> nNodes;
+		numNodes = nNodes;
+		nodes = new Node[numNodes];
+		
+		string type;
+		int r, g, b;
+		int x, y;
+		Color color;
+		bool filled;
 
-		for (int i=0; i<nNodes; i++) {
-			string type;
-			int r, g, b;
-			int x, y;
+		for (int i=0; i<numNodes; i++) {
 			input >> type >> r >> g >> b >> x >> y;
-			cout << type << "(" << x << "," << y << ")" << endl;
+			//cout << type << "(" << x << "," << y << ")" << endl;
+			
+			color.setColor(r, g, b);
+
+			if(type.at(0) == 'f')
+				filled = true;
+			else filled = false;
+
+			nodes[i].setX(x);
+			nodes[i].setY(y);
+			nodes[i].setColor(color);
+			nodes[i].setType(type.at(1));
+			nodes[i].setFilled(filled);
 		}
 
 		input >> nEdges;
+		numEdges = nEdges;
 
-		for (int i=0; i<nEdges; i++) {
-			int n1, n2;
+		int n1, n2;
+		for (int i=0; i<numEdges; i++) {
 			input >> n1 >> n2;
-			cout << "[" << n1 << "," << n2 << "]" << endl;
+			//cout << "[" << n1 << "," << n2 << "]" << endl;
 		}
 		input.close();
 		return true;
@@ -144,10 +176,11 @@ void main(int argc, char *argv[])
 	// Get filename from user
 	string filename;
 	cout << "Welcome to the Graph Display program!" << endl;
-	while(!readFile(filename))
+	do
 	{
 		filename = getUserInput("Enter the name of the input file: ");
-	}
+	} 
+	while(!readFile(filename));
 
 	// OpenGL initialization
 	glutInit(&argc, argv);
