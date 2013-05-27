@@ -12,13 +12,15 @@ using namespace std;
 const int W = 800, H = 400;
 const int nodeWidth = 10;
 
+Color edgeColor(255, 255, 255);
+Color bgColor(0, 0, 0);
+
 Node* nodes;
 Edge* edges;
 int numNodes;
 int numEdges;
 
-void setClippingRectangle(double lx, double ly,
-						  double rx, double ry)
+void setClippingRectangle(double lx, double ly, double rx, double ry)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();				
@@ -42,11 +44,13 @@ void reshape(int w, int h)
 	double vpAR = (double)w/h;
 	double newWcWidth, newWcHeight;
 	const double pixelsPerWC = 1;
-	if (vpAR > wcAR) {
+	if (vpAR > wcAR)
+	{
 		newWcHeight = h / pixelsPerWC;
 		newWcWidth = vpAR * newWcHeight;
 	} 
-	else {
+	else 
+	{
 		newWcWidth = w / pixelsPerWC;
 		newWcHeight = newWcWidth / vpAR;
 	}
@@ -90,9 +94,10 @@ void triangle(int x, int y, Color color, bool filled)
 	glEnd();
 }
 
+// TODO add arrow heads, shorten edge to not intersect node
 void edge(int x1, int y1, int x2, int y2)
 {
-	glColor3ub(255, 255, 255);
+	glColor3ub(edgeColor.getR(), edgeColor.getG(), edgeColor.getB());
 	glBegin(GL_LINES);
 		glVertex2i(x1, y1);
 		glVertex2i(x2, y2);	
@@ -101,7 +106,7 @@ void edge(int x1, int y1, int x2, int y2)
 
 void display(void)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor((float)bgColor.getR()/255, (float)bgColor.getG()/255, (float)bgColor.getB()/255, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	for(int i = 0; i < numNodes; i++)
@@ -135,7 +140,6 @@ string getUserInput(string prompt)
 	return input;
 }
 
-// TODO finish this
 bool readFile(string filename)
 {
 	int nNodes, nEdges;
@@ -152,7 +156,8 @@ bool readFile(string filename)
 		Color color;
 		bool filled;
 
-		for (int i=0; i<numNodes; i++) {
+		for (int i=0; i<numNodes; i++) 
+		{
 			input >> type >> r >> g >> b >> x >> y;
 			//cout << type << "(" << x << "," << y << ")" << endl;
 			
@@ -174,7 +179,8 @@ bool readFile(string filename)
 		edges = new Edge[numEdges];
 
 		int n1, n2;
-		for (int i=0; i<numEdges; i++) {
+		for (int i=0; i<numEdges; i++) 
+		{
 			input >> n1 >> n2;
 
 			edges[i].setNode1(nodes[n1]);
@@ -185,11 +191,11 @@ bool readFile(string filename)
 		input.close();
 		return true;
 	}
-	else {
+	else 
+	{
 		cout << "Unable to open file" << endl;
 		return false;
 	}
-	
 }
 
 void main(int argc, char *argv[])
@@ -204,6 +210,7 @@ void main(int argc, char *argv[])
 	while(!readFile(filename));
 
 	cout << "Drawing graph..." << endl;
+	
 	// OpenGL initialization
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);	
