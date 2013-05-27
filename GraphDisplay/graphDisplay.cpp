@@ -90,6 +90,15 @@ void triangle(int x, int y, Color color, bool filled)
 	glEnd();
 }
 
+void edge(int x1, int y1, int x2, int y2)
+{
+	glColor3ub(255, 255, 255);
+	glBegin(GL_LINES);
+		glVertex2i(x1, y1);
+		glVertex2i(x2, y2);	
+	glEnd();
+}
+
 void display(void)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -107,6 +116,11 @@ void display(void)
 					break;
 		}
 
+	}
+
+	for(int i = 0; i < numEdges; i++)
+	{
+		edge(edges[i].getNode1().getX(), edges[i].getNode1().getY(), edges[i].getNode2().getX(), edges[i].getNode2().getY());
 	}
 	
 	glutSwapBuffers();
