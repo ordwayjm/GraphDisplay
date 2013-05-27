@@ -2,7 +2,7 @@
 
 #include "Node.h"
 
-struct Edge {
+class Edge {
 	public:
 		Edge(Node initNode1, Node initNode2) 
 		{

@@ -1,6 +1,6 @@
 #pragma once
 
-struct Color {
+class Color {
 	public:
 		Color(int initR, int initG, int initB)
 		{
