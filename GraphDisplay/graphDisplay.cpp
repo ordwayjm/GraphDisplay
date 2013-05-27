@@ -3,6 +3,7 @@
 #include <string>
 #include "Color.h"
 #include "Node.h"
+#include "Edge.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ const int W = 800, H = 400;
 const int nodeWidth = 10;
 
 Node* nodes;
+Edge* edges;
 int numNodes;
 int numEdges;
 
@@ -155,10 +157,15 @@ bool readFile(string filename)
 
 		input >> nEdges;
 		numEdges = nEdges;
+		edges = new Edge[numEdges];
 
 		int n1, n2;
 		for (int i=0; i<numEdges; i++) {
 			input >> n1 >> n2;
+
+			edges[i].setNode1(nodes[n1]);
+			edges[i].setNode2(nodes[n2]);
+
 			//cout << "[" << n1 << "," << n2 << "]" << endl;
 		}
 		input.close();
@@ -182,6 +189,7 @@ void main(int argc, char *argv[])
 	} 
 	while(!readFile(filename));
 
+	cout << "Drawing graph..." << endl;
 	// OpenGL initialization
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);	

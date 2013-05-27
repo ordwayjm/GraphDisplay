@@ -19,7 +19,6 @@ struct Edge {
 		Node getNode1() { return node1; }
 		Node getNode2() { return node2; }
 
-		void setNodes(Node newNode1, Node newNode2) { node1 = newNode1; node2 = newNode2; }
 		void setNode1(Node newNode1) { node1 = newNode1; }
 		void setNode2(Node newNode2) { node2 = newNode2; }
 	private:
