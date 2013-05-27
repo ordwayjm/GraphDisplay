@@ -26,5 +26,19 @@
     <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="graph2.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="graph3.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="graph1.txt">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

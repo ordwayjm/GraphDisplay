@@ -2,7 +2,7 @@
 
 #include "Color.h"
 
-struct Node {
+class Node {
 	public:
 		Node(int initX, int initY, Color initColor, char initType, bool initFilled) 
 		{

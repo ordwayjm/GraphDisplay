@@ -78,7 +78,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Edge.h" />
     <ClInclude Include="Node.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="graph1.txt" />
+    <None Include="graph2.txt" />
+    <None Include="graph3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
