@@ -1,0 +1,10 @@
+Justin Ordway
+Program 1 - GraphDisplay
+5/28/13
+
+This program starts by asking the user the input text file to read the node 
+and edge information from. It then draws them on the screen based on the 
+color, shape, and position in the input text file. The drawn edges do not
+intersect the nodes, but there are no arrow heads at the end points. The
+program is able to resize properly without skewing and the nodes maintain
+their original size and position.
