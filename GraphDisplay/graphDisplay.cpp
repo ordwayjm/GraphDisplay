@@ -11,9 +11,11 @@ using namespace std;
 
 const int W = 800, H = 400;
 const int nodeWidth = 10;
+const int lineDistFromNode = 10;
 
 Color edgeColor(255, 255, 255);
 Color bgColor(0, 0, 0);
+
 
 Node* nodes;
 Edge* edges;
@@ -94,13 +96,23 @@ void triangle(int x, int y, Color color, bool filled)
 	glEnd();
 }
 
-// TODO add arrow heads, shorten edge to not intersect node
+// TODO add arrow heads
 void edge(int x1, int y1, int x2, int y2)
 {
+	// calculate new line end points to not intersect node
+	int dx = x1 - x2;
+	int dy = y1 - y2;
+	double length = sqrt((double)dx*dx + dy*dy);
+
+	int newX1 = x1 - (lineDistFromNode/length) * dx;
+	int	newX2 = x2 + (lineDistFromNode/length) * dx;
+	int newY1 = y1 - (lineDistFromNode/length) * dy;
+	int newY2 = y2 + (lineDistFromNode/length) * dy;
+
 	glColor3ub(edgeColor.getR(), edgeColor.getG(), edgeColor.getB());
 	glBegin(GL_LINES);
-		glVertex2i(x1, y1);
-		glVertex2i(x2, y2);	
+		glVertex2i(newX1, newY1);
+		glVertex2i(newX2, newY2);	
 	glEnd();
 }
 
